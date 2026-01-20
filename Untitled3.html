@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Balogun Samuel | Full Stack Developer</title>
+  <meta name="description" content="Balogun Samuel - Junior Full Stack Developer Portfolio"/>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net"/>
+  <style>
+    :root{
+      --bg:#020617;
+      --accent:#22d3ee;
+      --muted:#94a3b8;
+      --card-bg:rgba(255,255,255,.05);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:#fff;padding-top:80px;min-height:100vh;overflow-x:hidden}
+    section{scroll-margin-top:100px}
+    #particles-js{position:fixed;inset:0;z-index:-1;pointer-events:none}
+    nav{
+      position:fixed;top:0;left:0;right:0;height:70px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 20px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:1000;
+    }
+    nav h1{color:var(--accent)}
+    .nav-links{display:flex;gap:16px;align-items:center}
+    .nav-links a{
+      color:#fff;text-decoration:none;padding:8px;border-radius:6px;
+      transition:.25s;
+    }
+    .nav-links a:hover{background:rgba(34,211,238,.12);color:var(--accent)}
+    .menu-btn{display:none;background:none;border:none;color:#fff;font-size:22px}
+    @media(max-width:768px){
+      .menu-btn{display:block}
+      .nav-links{
+        position:absolute;left:0;right:0;top:70px;
+        background:var(--bg);
+        flex-direction:column;
+        max-height:0;overflow:hidden;
+        transition:.3s;
+      }
+      .nav-links.open{max-height:320px;padding:10px 0}
+      .nav-links a{width:100%;padding:12px 20px}
+    }
+    section{max-width:1100px;margin:auto;padding:80px 20px}
+    .hero{
+      min-height:calc(100vh - 160px);
+      display:flex;align-items:center;justify-content:center;
+      gap:40px;flex-wrap:wrap;text-align:center;
+    }
+    .glass-card{
+      background:var(--card-bg);
+      padding:20px;border-radius:18px;
+      backdrop-filter:blur(8px);
+      box-shadow:0 6px 30px rgba(34,211,238,.1);
+      animation:float 4s ease-in-out infinite;
+      max-width:220px;
+    }
+    .profile-img{
+      width:170px;height:170px;border-radius:50%;
+      object-fit:cover;border:3px solid var(--accent);
+    }
+    .hero h2{font-size:36px}
+    .hero p{color:var(--accent)}
+    .btn{
+      display:inline-block;
+      padding:9px 16px;
+      border-radius:8px;
+      border:1px solid var(--accent);
+      color:var(--accent);
+      margin:6px;
+      text-decoration:none;
+      transition:.3s;
+    }
+    .btn:hover{
+      background:var(--accent);
+      color:#000;
+      box-shadow:0 0 18px rgba(34,211,238,.6);
+      transform:translateY(-2px);
+    }
+    .btn.primary{background:var(--accent);color:#000}
+    .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+    .card{
+      background:var(--card-bg);
+      padding:16px;border-radius:10px;
+      border:1px solid rgba(255,255,255,.06);
+      transition:.35s;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(120deg,transparent,rgba(34,211,238,.15),transparent);
+      opacity:0;transition:.4s;
+    }
+    .card:hover{
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 20px 50px rgba(34,211,238,.18);
+      border-color:rgba(34,211,238,.5);
+    }
+    .card:hover::before{opacity:1}
+    .contact-card{
+      border:1px solid rgba(34,211,238,.1);
+      padding:20px;border-radius:12px;
+    }
+    input,textarea{
+      width:100%;padding:10px;margin-bottom:10px;
+      background:transparent;border:1px solid rgba(255,255,255,.08);
+      color:#fff;border-radius:8px;
+    }
+    .toast{
+      position:fixed;bottom:25px;right:25px;
+      background:#0b1220;padding:12px 16px;
+      border-left:5px solid var(--accent);
+      border-radius:8px;
+      opacity:0;transform:translateY(20px);
+      transition:.3s;z-index:2000;
+    }
+    .toast.show{opacity:1;transform:translateY(0)}
+    .spinner{
+      width:16px;height:16px;border:3px solid rgba(255,255,255,.1);
+      border-top-color:var(--accent);
+      border-radius:50%;display:inline-block;
+      animation:spin 1s linear infinite;
+    }
+    .cursor{
+      width:16px;height:16px;border:2px solid var(--accent);
+      border-radius:50%;position:fixed;
+      pointer-events:none;z-index:9999;
+      transform:translate(-50%,-50%);
+    }
+    footer{text-align:center;padding:40px;color:var(--muted)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes float{50%{transform:translateY(-10px)}}
+  </style>
+</head>
+<body>
+  <div id="particles-js" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <nav>
+    <h1>Samuel</h1>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="glass-card">
+        <img src="profile.jpg" class="profile-img" alt="Profile photo of Balogun Samuel">
+      </div>
+      <div>
+        <h2 id="hero-title">Balogun Samuel</h2>
+        <p>Junior Full Stack Developer</p>
+        <a href="#projects" class="btn primary">Projects</a>
+        <a href="#contact" class="btn">Contact</a>
+        <a href="cv.pdf" class="btn" rel="noopener">Download CV</a>
+      </div>
+    </section>
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About Me</h2>
+      <div class="card" style="margin-top:16px">
+        Motivated Junior Full Stack Developer with hands-on experience in building responsive web applications using HTML, CSS, JavaScript, and back-end basics.
+      </div>
+    </section>
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Tech Stack</h2>
+      <div class="skills" style="margin-top:16px">
+        <div class="card">HTML</div><div class="card">CSS</div><div class="card">JavaScript</div>
+        <div class="card">React</div><div class="card">Tailwind</div><div class="card">Node.js</div>
+        <div class="card">PostgreSQL</div><div class="card">Git</div>
+      </div>
+    </section>
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      <div class="skills" style="margin-top:16px">
+        <div class="card"><strong>VTU Website (Blink.net)</strong><br><span style="color:var(--muted)">Virtual Top-Up platform</span></div>
+        <div class="card"><strong>E-Commerce Website</strong><br><span style="color:var(--muted)">Online store system</span></div>
+        <div class="card"><strong>Personalized E-Learning System</strong><br><span style="color:var(--muted)">Student dashboard, Tutor's dashboard</span></div>
+        <div class="card"><strong>Hotel Booking Website</strong><br><span style="color:var(--muted)">Reservations system</span></div>
+        <div class="card"><strong>Fintech Website</strong><br><span style="color:var(--muted)">Wallet & transactions</span></div>
+      </div>
+    </section>
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact Me</h2>
+      <div class="contact-card" style="margin-top:16px">
+        <form id="contact-form" novalidate>
+          <label class="sr-only" for="name">Name</label>
+          <input id="name" name="name" placeholder="Name" required>
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Email" required>
+          <label class="sr-only" for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Message" rows="4" required></textarea>
+          <input name="company" style="display:none" autocomplete="off">
+          <button class="btn" type="submit"><span id="btnText">Send Message</span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer>© 2026 Balogun Samuel</footer>
+  <script>
+    (function loadLibs(){
+      var s1 = document.createElement('script');
+      s1.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
+      s1.defer = true;
+      document.head.appendChild(s1);
+      var s2 = document.createElement('script');
+      s2.src = "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+      s2.defer = true;
+      s2.onload = function(){ if(window.emailjs) emailjs.init("GJWz7PE2HB_y2TeEG"); };
+      document.head.appendChild(s2);
+    })();
+    (function(){
+      var menuBtn = document.getElementById('menuBtn');
+      var navLinks = document.getElementById('navLinks');
+      function setOpen(open){
+        navLinks.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      menuBtn.addEventListener('click', function(){ setOpen(!navLinks.classList.contains('open')); });
+      navLinks.addEventListener('click', function(e){
+        if(e.target.tagName === 'A') setOpen(false);
+      });
+      window.addEventListener('resize', function(){ if(window.innerWidth > 768) setOpen(false); });
+    })();
+    (function(){
+      var cursor = document.getElementById('cursor');
+      document.addEventListener('mousemove', function(e){
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      document.addEventListener('mouseleave', function(){ cursor.style.opacity = '0'; });
+      document.addEventListener('mouseenter', function(){ cursor.style.opacity = '1'; });
+    })();
+    (function initParticles(){
+      function tryInit(){
+        if(window.particlesJS){
+          particlesJS("particles-js",{
+            particles:{
+              number:{value:60},
+              color:{value:"#22d3ee"},
+              size:{value:2},
+              move:{speed:1},
+              line_linked:{enable:true,color:"#22d3ee"}
+            }
+          });
+        } else {
+          setTimeout(tryInit, 200);
+        }
+      }
+      tryInit();
+    })();
+    (function(){
+      var form = document.getElementById('contact-form');
+      var toast = document.getElementById('toast');
+      var btnText = document.getElementById('btnText');
+      function showToast(msg, ok){
+        toast.textContent = msg;
+        toast.style.borderLeftColor = ok ? '#22d3ee' : 'red';
+        toast.classList.add('show');
+        setTimeout(function(){ toast.classList.remove('show'); }, 3000);
+      }
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if(form.elements['company'].value.trim() !== '') return;
+        if(!form.checkValidity()){
+          showToast('Please fill required fields.', false);
+          return;
+        }
+        btnText.innerHTML = '<span class="spinner" aria-hidden="true"></span>';
+        function send(){
+          if(window.emailjs && emailjs.sendForm){
+            emailjs.sendForm("service_w0loxkb","template_1ih1f4l",form)
+            .then(function(){
+              showToast("Message sent successfully 🚀", true);
+              form.reset();
+            })
+            .catch(function(){
+              showToast("Failed to send ❌", false);
+            })
+            .finally(function(){
+              btnText.textContent = "Send Message";
+            });
+          } else {
+            setTimeout(send, 400);
+          }
+        }
+        send();
+      });
+    })();
+  </script>
+</body>
+</html>
